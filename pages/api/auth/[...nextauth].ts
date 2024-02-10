@@ -18,14 +18,7 @@ export const authConfig: NextAuthOptions = {
       clientSecret: githubSecret!,
     }),
   ],
-  callbacks: {
-    session: async ({ session, user }) => {
-      if (session.user) {
-        session.user.id = user.id;
-      }
-      return session;
-    },
-  },
+
   adapter: PrismaAdapter(prisma) as Adapter,
 };
 

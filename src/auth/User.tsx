@@ -15,7 +15,6 @@ export const User = async () => {
         alt="img"
       />
       <h1 className="text-3xl mb-10">{session.user.name}</h1>
-      <p>{session.user.id}</p>
 
       <LogoutBtn />
     </div>
