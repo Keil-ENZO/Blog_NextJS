@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {};
 
 // next.config.js
 
 module.exports = {
   images: {
-    domains: ['avatars.githubusercontent.com'], // Ajoutez le domaine d'hébergement d'images ici
+    domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com"],
   },
-}
+};

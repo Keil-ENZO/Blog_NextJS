@@ -13,10 +13,11 @@ export const User = async () => {
       <Image
         src={session.user.image ?? ""}
         alt="img"
-        width={100}
-        height={100}
+        width={300}
+        height={300}
       />
       <h1 className="text-3xl mb-10">{session.user.name}</h1>
+      <p className="text-xl mb-10">{session.user.email}</p>
 
       <LogoutBtn />
     </div>
