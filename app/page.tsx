@@ -8,14 +8,24 @@ export default async function Home() {
   const session = await getAuthSession();
 
   if (session && (session as any).user.email === "enzo.keil06@icloud.com") {
-    return <Admin />;
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <Admin />
+      </main>
+    );
+  } else if (session) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <User />
+      </main>
+    );
   } else {
-    return <User />;
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <LoginBtn />
+      </main>
+    );
   }
-  console.log("session", session);
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <LoginBtn />
-    </main>
-  );
+
+  
 }
