@@ -1,15 +1,19 @@
 import { User } from "@/src/auth/User";
-import axios from "axios";
+import { getAuthSession } from "@/src/lib/auth";
+import Link from "next/link";
 
-export default function Admin() {
-  axios.get("http://localhost:3000/api/hello/routes").then((res) => {
-    console.log(res.data);
-  });
+export default async function Admin() {
+  const session = await getAuthSession();
+
+  if (!session?.user) {
+    return <div>loading...</div>;
+  }
 
   return (
     <div>
       <h1>Home admin</h1>
       <User />
+      <Link href="/pages/addArticle"> Ajouter article </Link>
     </div>
   );
 }
