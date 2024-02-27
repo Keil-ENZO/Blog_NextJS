@@ -1,23 +1,34 @@
 "use client";
 
 import axios from "axios";
+import Link from "next/link";
 import { useState } from "react";
+import { uploadFile } from "./upload.action";
 
 export default function AjouterArticle() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [picture, setPicture] = useState("");
+  const [picture, setPicture] = useState<string | null>(null);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    const formData: FormData = new FormData(e.currentTarget);
+    const file = formData.get("picture") as File;
+
+    const url = await uploadFile(formData);
+
+    setPicture(url);
+
+    console.log("url", url);
+
     try {
-      await axios.post("/api/hello/routes", { title, content, picture });
+      await axios.post("/api/hello/routes", { title, content, url });
       console.log("Article ajouté avec succès !");
       // Réinitialiser les champs du formulaire après soumission réussie
       setTitle("");
       setContent("");
-      setPicture("");
+      setPicture(null);
     } catch (error) {
       console.error("Erreur lors de l'ajout de l'article :", error);
     }
@@ -46,15 +57,21 @@ export default function AjouterArticle() {
         </div>
         <div>
           <label htmlFor="picture">Image :</label>
-          <input
-            type="text"
-            id="picture"
-            value={picture}
-            onChange={(e) => setPicture(e.target.value)}
-          />
+
+          <input type="file" id="picture" name="picture" />
         </div>
         <button type="submit">Ajouter l article</button>
       </form>
+
+      {picture ? (
+        <img
+          src={picture}
+          alt="image"
+          style={{ width: "200px", height: "200px" }}
+        />
+      ) : null}
+
+      <Link href="/pages/article"> Articles </Link>
     </div>
   );
 }
