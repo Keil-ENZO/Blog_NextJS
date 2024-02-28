@@ -16,14 +16,14 @@ export default function AjouterArticle() {
     const formData: FormData = new FormData(e.currentTarget);
     const file = formData.get("picture") as File;
 
-    const url = await uploadFile(formData);
+    const picture = await uploadFile(formData);
 
-    setPicture(url);
+    setPicture(picture);
 
-    console.log("url", url);
+    console.log("picture", picture);
 
     try {
-      await axios.post("/api/hello/routes", { title, content, url });
+      await axios.post("/api/hello/routes", { title, content, picture });
       console.log("Article ajouté avec succès !");
       // Réinitialiser les champs du formulaire après soumission réussie
       setTitle("");

@@ -24,10 +24,12 @@ export default async function handler(
       });
       res.status(200).json({ message: "Hello World" });
     } catch (error) {
+      console.error("Erreur lors de la création de l'article :", error);
       res
         .status(500)
         .json({ message: "Erreur lors de la création de l'article" });
     }
+
   } else {
     // Si la méthode de la requête n'est pas autorisée
     res.setHeader("Allow", ["GET"]);

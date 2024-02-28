@@ -7,8 +7,8 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-      const users = await prisma.articles.findMany();
-      res.status(200).json(users);
+      const articles = await prisma.articles.findMany();
+      res.status(200).json(articles);
     } catch (error) {
       res
         .status(500)
