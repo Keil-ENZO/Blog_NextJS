@@ -15,6 +15,7 @@ export default async function Admin() {
       <h1>Home admin</h1>
       <User />
       <Link href="/pages/addArticle"> Ajouter article </Link>
+      <Link href="/pages/article"> Articles </Link>
 
       {/* <AddArticle /> */}
     </div>

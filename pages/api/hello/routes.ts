@@ -22,7 +22,7 @@ export default async function handler(
           likes: 0,
         },
       });
-      res.status(200).json({ message: "Hello World" });
+      res.status(200).json({ message: addArticle });
     } catch (error) {
       console.error("Erreur lors de la création de l'article :", error);
       res

@@ -19,6 +19,29 @@ export default function Article() {
 
     fetchAllArticles();
   }, []);
+
+  const handleAddLikes = async (id: any) => {
+    try {
+      const updatedArticle = await axios.put("/api/updateArticle/routes", {
+        id,
+      }); // Envoyer l'ID de l'article dans le corps de la requête
+      console.log("updatedArticle", updatedArticle.data);
+
+      // Mettre à jour les likes localement
+      const updatedArticles: { id: number; likes: number }[] = articles.map(
+        (article: { id: number; likes: number }) => {
+          if (article.id === id) {
+            return { ...article, likes: article.likes + 1 };
+          }
+          return article;
+        }
+      );
+      setArticles(updatedArticles);
+    } catch (error) {
+      console.error("Erreur lors de l'ajout des likes :", error);
+    }
+  };
+
   return (
     <div>
       <h1>Article</h1>
@@ -33,6 +56,11 @@ export default function Article() {
             width={500}
             height={300}
           />
+
+          <p>{article.id}</p>
+          <p>{article.likes}</p>
+
+          <button onClick={() => handleAddLikes(article.id)}>Add Likes</button>
         </div>
       ))}
     </div>
