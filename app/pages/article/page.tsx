@@ -42,6 +42,23 @@ export default function Article() {
     }
   };
 
+  const handleDeleteArticle = async (id: any) => {
+    try {
+      const deletedArticle = await axios.delete("/api/deleteArticle/routes", {
+        data: { id },
+      });
+      console.log("deletedArticle", deletedArticle.data);
+
+      // Supprimer l'article localement
+      const updatedArticles = articles.filter(
+        (article: { id: number }) => article.id !== id
+      );
+      setArticles(updatedArticles);
+    } catch (error) {
+      console.error("Erreur lors de la suppression de l'article :", error);
+    }
+  };
+
   return (
     <div>
       <h1>Article</h1>
@@ -57,10 +74,11 @@ export default function Article() {
             height={300}
           />
 
-          <p>{article.id}</p>
           <p>{article.likes}</p>
-
           <button onClick={() => handleAddLikes(article.id)}>Add Likes</button>
+          <button onClick={() => handleDeleteArticle(article.id)}>
+            Delete Article
+          </button>
         </div>
       ))}
     </div>

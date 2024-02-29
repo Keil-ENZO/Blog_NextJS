@@ -7,7 +7,7 @@ import { getAuthSession } from "@/src/lib/auth";
 export default async function Home() {
   const session = await getAuthSession();
 
-  if (session && (session as any).user.email === "enzo.keil06@icloud.com") {
+  if (session && (session as any).user.email === process.env.EMAIL_ADMIN) {
     return (
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <Admin />
