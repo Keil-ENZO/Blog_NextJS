@@ -1,4 +1,5 @@
 "use client";
+
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -73,8 +74,7 @@ export default function Article() {
             width={500}
             height={300}
           />
-
-          <p>{article.likes}</p>
+          ,<p>{article.likes}</p>
           <button onClick={() => handleAddLikes(article.id)}>Add Likes</button>
           <button onClick={() => handleDeleteArticle(article.id)}>
             Delete Article
